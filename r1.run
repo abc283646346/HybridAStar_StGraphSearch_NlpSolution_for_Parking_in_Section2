@@ -1,0 +1,34 @@
+reset;
+model C1.mod;
+include initial_guess1.INIVAL;
+option solver ipopt;
+solve;
+printf "1">>("flag.txt");
+shell ("del " & ("x.txt"));
+shell ("del " & ("y.txt"));
+shell ("del " & ("theta.txt"));
+shell ("del " & ("phy.txt"));
+shell ("del " & ("a.txt"));
+shell ("del " & ("v.txt"));
+shell ("del " & ("w.txt"));
+shell ("del " & ("terminal_time.txt"));
+
+for {i in I} {
+	printf "%5.4f;",  x[i]>>("x.txt");
+	printf "%5.4f;",  y[i]>>("y.txt");
+	printf "%5.4f;",  theta[i]>>("theta.txt");
+	printf "%5.4f;",  phy[i]>>("phy.txt");
+	printf "%5.4f;",  a[i]>>("a.txt");
+	printf "%5.4f;",  v[i]>>("v.txt");
+	printf "%5.4f;",  w[i]>>("w.txt");
+}
+printf "%5.4f;",  tf>>("terminal_time.txt");
+close ("x.txt");
+close ("y.txt");
+close ("theta.txt");
+close ("v.txt");
+close ("a.txt");
+close ("phy.txt");
+close ("w.txt");
+close ("terminal_time.txt");
+display(tf);
